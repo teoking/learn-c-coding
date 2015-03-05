@@ -47,11 +47,6 @@ long read_long(FILE *in)
 
 int main()
 {
-    if (0)
-        printf("aaaaaa");
-    if (111)
-        printf("bbbbbb");
-    
     FILE *file = fopen("file.bin", "w");
     long data = 1024;
     long row = 1000;

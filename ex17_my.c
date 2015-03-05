@@ -221,6 +221,23 @@ void Database_list()
     }
 }
 
+void Database_find(const char *word)
+{
+    struct Database *db = conn.db;
+    struct Address *addr;
+    int match;
+
+    printf("Found records that match %s:\n", word);
+    for (addr = db->rows; addr < db->rows + db->max_rows; ++addr) {
+        if (addr->set) {
+            match = strstr(addr->name, word) || strstr(addr->email, word);
+            if (match) {
+                Address_print(addr);
+            }
+        }
+    }
+}
+
 int main(int argc, char *argv[])
 {
     if(argc < 3) die("USAGE: ex17 <dbfile> <action> [action params]");
@@ -266,8 +283,12 @@ int main(int argc, char *argv[])
         case 'l':
             Database_list();
             break;
+
+        case '?':
+            Database_find(argv[3]);
+            break;
         default:
-            die("Invalid action, only: c=create, g=get, s=set, d=del, l=list");
+            die("Invalid action, only: c=create, g=get, s=set, d=del, l=list, ?=find");
     }
 
     Database_close();

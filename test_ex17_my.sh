@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Open the fowllow line to make this shell exiting if any command has an error.
+# set -e
+
 rm a.bin
 make
 
@@ -22,3 +25,4 @@ echo "##### Test beging #####"
 ./ex17_my a.bin s 5 Wan wan@ccc.com
 
 ./ex17_my a.bin l
+./ex17_my a.bin ? an
