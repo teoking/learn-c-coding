@@ -15,8 +15,8 @@ clean:
 	rm -fR *.d
 
 # This is only a test target for devpkg.
-install:
-	$(echo) "Install function called!"
+install: all
+	@echo "Install function called!"
 
 # Generate dependencies automatically
 include $(obj:.o=.d)
