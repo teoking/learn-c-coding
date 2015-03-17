@@ -1,0 +1,5 @@
+Possible Improvement:
+1. Show help if there are no arguments passed in.
+2. Uninstall the software that the devpkg installed.
+3. List more information about the installed software (e.g. installed date, short name, ...).
+4. 

@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <string.h>
- 
+
+// A macro has the same name with strlen function.
+#define strlen(s) 666
+
+void foo(char *flag) {
+    printf("Foo to you too! %s\n", flag);
+};
+
 int main(void)
 {
     char str[] = "Hello, world!";
@@ -41,24 +48,32 @@ int main(void)
         case 7: printf("7\n");
     }
 
+    // crazy function pointers
     // --------------------
-    char strTmp = "a string";
-    int jTmp = (strlen) (&strTmp);
-    printf("(strlen) (str) = %d\n", jTmp);
+    char *strTmp = "a string";
+    int jTmp = (strlen) (strTmp);
+    printf("\nstrlen macro defined: \n");
+    printf("(strlen) (str) = %zu\n", jTmp);
 
-    char *strArr[10];
-    strArr[0] = "a string a";
-    strArr[1] = "a string b";
-    strArr[2] = "a string b";
-    strArr[3] = "a string b";
-    strArr[4] = "a string b";
-    strArr[5] = "a string b";
-    strArr[6] = "a string b";
-    strArr[7] = "a string b";
-    strArr[8] = "a string b";
-    strArr[9] = "a string b";
-    jTmp = (strlen) (strArr);
-    printf("(strlen) (strArr) = %d\n", jTmp);
- 
+    printf("strlen(str) = %zu\n\n", strlen(strTmp));
+
+    // --------------------
+    // links: http://stackoverflow.com/questions/6893285/why-do-all-these-crazy-function-pointer-definitions-all-work-what-is-really-goi
+    void (*p1_foo)() = foo;
+    void (*p2_foo)() = *foo;
+    void (*p3_foo)() = &foo;
+    void (*p4_foo)() = *&foo;
+    void (*p5_foo)() = &*foo;
+    void (*p6_foo)() = **foo;
+    void (*p7_foo)() = **********************foo;
+
+    (*p1_foo)("p1");
+    (*p2_foo)("p2");
+    (*p3_foo)("p3");
+    (*p4_foo)("p4");
+    (*p5_foo)("p5");
+    (*p6_foo)("p6");
+    (*p7_foo)("p7");
+
     return 0;
 }
