@@ -8,6 +8,23 @@
 #include "db.h"
 #include "commands.h"
 
+void help()
+{
+    printf
+    (
+"Usage: devpkg [Options] url\n\
+\n\
+Options:\n\
+    -I install\n\
+    -L list\n\
+    -c config opts\n\
+    -m make opts\n\
+    -i install opts\n\
+    -S init\n\
+    -F fetch project\n\
+    -B build project\n\n");
+}
+
 int main(int argc, const char *argv[])
 {
     apr_pool_t *p = NULL;
@@ -94,7 +111,8 @@ int main(int argc, const char *argv[])
             break;
 
         default:
-            sentinel("Invalid command given.");
+            // sentinel("Invalid command given.");
+            help();
     }
 
 
