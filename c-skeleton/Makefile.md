@@ -1,4 +1,4 @@
-# This makefile is designed to build a library.
+# This makefile is designed to build a static library.
 
 ## 注释版，实际使用时可删除注释 ##
 
