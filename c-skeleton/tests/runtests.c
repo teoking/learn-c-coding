@@ -1,5 +1,8 @@
 /*
  * This is an implementation for runtests.sh in C.
+ * TODO:
+ * 1. build this in the project's Makefile
+ *
  */
 
 #include <stdio.h>
@@ -70,13 +73,26 @@ int main(int argc, char *argv[])
 
     char tmpStr[8 + 255];
     char *filePath;
+
     // Iterate the directory
     while ((dp = readdir(dirp)) != NULL) {
         filePath = get_file_path(tmpStr, "./tests/", dp->d_name);
         if (strstr(dp->d_name, name) != NULL && is_executable(filePath)) {
-            // TODO run the tests in a child process.
-            // run the test file
-            execlp("valgrind", "valgrind", filePath, (char *)0);
+            if (fork() == 0) {
+                // handle child stuff
+                // run the test file
+                execlp("valgrind", "valgrind", filePath, (char *)0);
+
+                die("Run tests failed!");
+            } else {
+                // handle parent stuff
+                int status;
+                wait(&status);
+
+                if (!WIFEXITED(status)) {
+                    printf("ERROR Test exit with %d\n",WEXITSTATUS(status));
+                }
+            }
         }
     }
 
