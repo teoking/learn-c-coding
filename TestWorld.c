@@ -75,5 +75,11 @@ int main(void)
     (*p6_foo)("p6");
     (*p7_foo)("p7");
 
+    char *str4 = "12345";
+    char strArr[5 + 100];
+    strcat(strArr, str4);
+    printf("strcat 1 strArr = %s\n", strcat(strArr, "67890ABCDEF"));
+    printf("strcat 2 strArr = %s\n", strcat(strArr, "54321"));
+
     return 0;
 }
