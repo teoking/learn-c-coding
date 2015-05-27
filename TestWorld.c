@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 // A macro has the same name with strlen function.
 #define strlen(s) 666
@@ -80,6 +81,10 @@ int main(void)
     strcat(strArr, str4);
     printf("strcat 1 strArr = %s\n", strcat(strArr, "67890ABCDEF"));
     printf("strcat 2 strArr = %s\n", strcat(strArr, "54321"));
+
+    time_t t = time(NULL);
+    printf("%s", asctime(localtime(&t)));
+    printf("%d seconds since the Epoch\n", (int)t);
 
     return 0;
 }
